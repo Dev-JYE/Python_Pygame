@@ -1,6 +1,17 @@
 import tkinter as tk
 
+def click_btn():
+      pts=0
+      for i in range(7):
+            if bvar[i].get()==True:
+                  pts=pts+1
+      godsaeng=int(100*pts/7)
+      txt.delete('1.0',tk.END)
+      txt.insert('1.0','<진단 결과>\n 당신의 갓생지수는'+str(godsaeng)+ '%입니다.\n'+results[pts])
 
+
+def want2_exit():
+    r.destroy()
 
 r=tk.Tk()
 r.title('갓생 지수 진단 게임')
@@ -8,7 +19,7 @@ r.resizable(False,False) #윈도우 사이즈 변경 불가!
 cvs=tk.Canvas(r,width=800,height=700,bg='white')
 cvs.pack()
 #cvs['bg']으로 cvs에서 설정한 배경 색을 가져올 수 있다! 와 놀라운 파이썬세상~~
-title=tk.Label(r,text='당신은 갓생을 살고 있나요?',font=('둥근모꼴',30),fg='black',bg=cvs['bg'])
+title=tk.Label(r,text='당신은 갓생을 살고 있나요?',font=('둥근모꼴',30),fg='Gray',bg=cvs['bg'])
 title.place(x=150,y=30)
 
 figio=tk.PhotoImage(file='Assets/화이팅죠르디.png')
@@ -32,11 +43,26 @@ cvs.create_image(300,400,image=samgim)
 apple=tk.PhotoImage(file='Assets/통사과.png')
 cvs.create_image(300,450,image=apple)
 
+#주석 리스트들
+results=[
+      'Seriously?',
+      'Terrible',
+      'Awful',
+      'Normal',
+      'Good',
+      'Great',
+      'Awesome',
+      'Amazing',
+      ]
+
 #버튼
-btn=tk.Button(text='갓생 가보자고!',font=('둥근모꼴'),bg='#BDE7C8')
+btn=tk.Button(text='갓생 가보자고!',font=('둥근모꼴',17),bg='#BDE7C8',command=click_btn)
 btn.place(x=400,y=500)
-txt=tk.Text(width=30,height=3,font=('둥근모꼴',16))
-txt.place(x=300,y=550)
+txt=tk.Text(width=30,height=3,font=('둥근모꼴',16),bg='#BDE7C8',fg='Gray')
+txt.place(x=350,y=550)
+
+btn_exit=tk.Button(text='나가기',font=('둥근모꼴',17),command=want2_exit,bg='Gray',fg='#BDE7C8')
+btn_exit.place(x=600,y=500)
 
 #None은 아무것도 존재하지 않음을 의미하는 값.
 bvar=[None]*7  #bvar는 booleanvar 객체를 담기 위한 리스트!
